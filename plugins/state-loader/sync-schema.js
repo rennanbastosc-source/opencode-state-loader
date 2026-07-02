@@ -63,10 +63,27 @@ export function syncSchema(schemaPath, statePath) {
   const markerStart = '<!-- MODELS -->'
   const markerEnd = '<!-- /MODELS -->'
   const startIdx = state.indexOf(markerStart)
-  const endIdx = state.indexOf(markerEnd)
 
-  if (startIdx === -1 || endIdx === -1) {
-    return { models: businessModels.length || 0, message: 'markers <!-- MODELS --> not found. Add them to STATE.md.' }
+  if (startIdx === -1) {
+    // No markers yet — append them at end of file
+    const newState = `${state.trimEnd()}\n\n## Models\n\n${markerStart}\n${table}\n${markerEnd}\n`
+    writeFileSync(statePath, newState, 'utf8')
+    return { models: businessModels.length, message: `${businessModels.length} models synced — markers added to existing STATE.md` }
+  }
+
+  const endIdx = state.indexOf(markerEnd, startIdx)
+  if (endIdx === -1) {
+    // Opening marker exists but closing doesn't — append closing
+    const newState = `${state.trimEnd()}\n${markerEnd}`
+    writeFileSync(statePath, newState, 'utf8')
+    // Re-read and replace
+    const updated = readFileSync(statePath, 'utf8')
+    const newEndIdx = updated.indexOf(markerEnd)
+    const before = updated.slice(0, startIdx + markerStart.length)
+    const after = updated.slice(newEndIdx)
+    const finalState = `${before}\n${table}\n${after}`
+    writeFileSync(statePath, finalState, 'utf8')
+    return { models: businessModels.length, message: `${businessModels.length} models synced (fixed missing closing marker)` }
   }
 
   const before = state.slice(0, startIdx + markerStart.length)
