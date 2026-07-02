@@ -1,0 +1,12 @@
+{
+  "name": "opencode-state-loader",
+  "version": "1.0.0",
+  "description": "Inject STATE.md + AGENTS.md into opencode's system prompt. Global plugin with self-implementing workspace setup via tool init-state.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "node --check plugins/state-loader/plugin.js"
+  },
+  "keywords": ["opencode", "plugin", "state", "context", "prisma"],
+  "license": "MIT"
+}

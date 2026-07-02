@@ -1,0 +1,31 @@
+# Estado do Projeto (STATE.md)
+
+Estado mutável do projeto. Injetado no system prompt a cada sessão via plugin.
+Convenções fixas e padrões de UI → `AGENTS.md`.
+
+## 1. Visão Geral
+
+- **Stack:** Next.js 16.2.9 · React 19 · TypeScript · Tailwind 4 · Prisma 7 · PostgreSQL
+- **Deploy:** Vercel (push → preview/production)
+- **Auth:** NextAuth Credentials — bcrypt, role via JWT→session
+
+## 2. Modelos Prisma
+
+<!-- MODELS -->
+| Modelo | Relações principais |
+|--------|-------------------|
+<!-- /MODELS -->
+
+## 3. Estado Atual
+
+**Branch:** `main`
+
+**Funcionalidades estáveis:**
+- Auth por role + CRUD veículos + abastecimentos
+- Manutenções + estoque + combustíveis
+- Relatórios + dashboard
+
+## 4. Backlog
+
+- [ ] Feature A
+- [ ] Feature B
