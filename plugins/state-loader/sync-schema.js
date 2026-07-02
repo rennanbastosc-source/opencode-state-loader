@@ -50,8 +50,8 @@ export function syncSchema(schemaPath, statePath) {
   }
 
   const businessModels = allModelNames.filter(n => !hideFromTable.has(n))
-  const header = '| Modelo | Relações principais |'
-  const separator = '|--------|-------------------|'
+  const header = '| Model | Relations |'
+  const separator = '|-------|-----------|'
   const rows = businessModels.map(name => {
     const rels = relationMap.get(name)
     const relStr = rels && rels.size > 0 ? [...rels].join(', ') : '—'
