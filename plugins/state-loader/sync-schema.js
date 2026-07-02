@@ -99,13 +99,26 @@ fi
 
 export function createStateTemplate(statePath) {
   const content = `<!-- MODELS -->
+| Model | Relations |
+|-------|-----------|
+| \`Example\` | — |
 <!-- /MODELS -->
 `
   writeFileSync(statePath, content, 'utf8')
 }
 
 export function createAgentTemplate(agentsPath) {
-  const content = ``
+  const content = `# Conventions
+
+## Stack
+
+## Code Conventions
+
+## File Structure
+
+| File | Purpose |
+|------|---------|
+`
   writeFileSync(agentsPath, content, 'utf8')
 }
 
