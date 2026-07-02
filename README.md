@@ -31,8 +31,8 @@ inicialize o state-loader
 
 The agent invokes the `init-state` tool, which:
 
-1. Creates `STATE.md` (if missing) with a template + `<!-- MODELS -->` markers
-2. Creates `AGENTS.md` (if missing) with a template
+1. Creates a blank `STATE.md` with `<!-- MODELS -->` markers (the git hook fills it later)
+2. Creates a blank `AGENTS.md` (you fill with project conventions)
 3. Copies `sync-schema.js` to `.opencode/sync-schema.js` for git hook access
 4. Detects `prisma/schema.prisma` → extracts models bidirectionally into `STATE.md`
 5. Sets up `.git/hooks/pre-commit` to auto-sync on schema changes
@@ -72,67 +72,38 @@ The table is updated:
 ### Example output
 
 ```
-| Modelo | Relações principais |
-|--------|-------------------|
+| Model | Relations |
+|-------|-----------|
 | User | Account?, Session?, Driver? |
-| Vehicle | DriverVehicle?, Refueling?, Maintenance?, Occurrence?, PreventiveSchedule? |
-| Driver | DriverVehicle?, Refueling?, User?, FuelTank?, Maintenance?, Occurrence? |
+| Post | Comment? |
+| Tag | PostTag? |
 ```
 
-## File Templates
+## Templates (created by `init-state`)
 
-### STATE.md
+`init-state` creates both files as clean skeletons — no opinionated sections, no language bias. You edit them to fit your project.
+
+### STATE.md (before first sync)
 
 ```markdown
-# Estado do Projeto
-
-## 1. Visão Geral
-
-- **Stack:** <!-- preencha -->
-
-## 2. Modelos Prisma
-
 <!-- MODELS -->
-| Modelo | Relações principais |
-|--------|-------------------|
 <!-- /MODELS -->
-
-## 3. Estado Atual
-
-**Branch:** <!-- preencha -->
-
-## 4. Backlog
-
-- [ ] Backlog item
 ```
+
+The `<!-- MODELS -->` markers are the only structure. On the next commit that changes `prisma/schema.prisma`, the git hook auto-populates the table between them.
 
 ### AGENTS.md
 
-```markdown
-# Convenções do Projeto
-
-Regras permanentes de desenvolvimento. Estado mutável → `STATE.md`.
-
-## Stack
-
-<!-- preencha -->
-
-## Padrões de Código
-
-<!-- adicione convenções -->
-
-## Estrutura de Arquivos
-
-| Arquivo | Função |
-|---------|--------|
+```
+(empty — created as blank file for you to fill)
 ```
 
 ## Why Both Files?
 
-- `STATE.md` = mutable state (branch, features, backlog, models)
-- `AGENTS.md` = permanent rules (code style, UI patterns, conventions)
+- `STATE.md` = mutable state (models, features, backlog, known issues)
+- `AGENTS.md` = permanent rules (code style, conventions, file structure)
 
-Separation of concerns. The agent doesn't need to search for project-specific conventions — they're in context from the first message.
+Separation of concerns. The agent sees both in context from the first message — no runtime searches needed.
 
 ## License
 

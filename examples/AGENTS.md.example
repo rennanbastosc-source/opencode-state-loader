@@ -1,28 +1,5 @@
-# Convenções do Projeto (AGENTS.md)
-
-Regras permanentes de desenvolvimento. Estado mutável (branch, features, backlog) → `STATE.md`.
-
 ## Stack
 
-Next.js 16.2.9 (App Router, Turbopack) · React 19 · TypeScript · Tailwind 4 · Prisma 7 · PostgreSQL (Neon) · NextAuth v5 beta · shadcn/ui (Radix primitives)
+## Code Conventions
 
-## Padrões de UI (shadcn/Radix)
-
-### SelectValue — label explícito
-Todo select controlado com `useWatch` + `value=` precisa de children computado.
-
-### SelectTrigger — sempre `w-full`
-Todo `<SelectTrigger>` dentro de modal/form recebe `className="w-full"`.
-
-## Padrões de Código
-
-### Ordenação de pernadas
-Qualquer cálculo de pernada/delta sequencial deve ordenar pela dimensão que representa "quando aconteceu" (data), nunca pela métrica que está sendo auditada.
-
-## Estrutura de Arquivos
-
-| Arquivo | Função |
-|---------|--------|
-| `prisma/schema.prisma` | Schema completo |
-| `src/auth.ts` | NextAuth v5 — role JWT→session |
-| `src/actions/*.ts` | Server actions por domínio |
+## File Structure

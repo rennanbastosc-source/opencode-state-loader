@@ -98,51 +98,14 @@ fi
 }
 
 export function createStateTemplate(statePath) {
-  const content = `# Estado do Projeto
-
-Estado mutável do projeto. Injetado no system prompt a cada sessão via plugin.
-Convenções fixas e padrões de UI → \`AGENTS.md\`.
-
-## 1. Visão Geral
-
-- **Stack:** <!-- preencha -->
-
-## 2. Modelos Prisma
-
-<!-- MODELS -->
-| Modelo | Relações principais |
-|--------|-------------------|
+  const content = `<!-- MODELS -->
 <!-- /MODELS -->
-
-## 3. Estado Atual
-
-**Branch:** <!-- preencha -->
-
-## 4. Backlog
-
-- [ ] Backlog item
 `
   writeFileSync(statePath, content, 'utf8')
 }
 
 export function createAgentTemplate(agentsPath) {
-  const content = `# Convenções do Projeto
-
-Regras permanentes de desenvolvimento. Estado mutável → \`STATE.md\`.
-
-## Stack
-
-<!-- preencha -->
-
-## Padrões de Código
-
-<!-- adicione convenções -->
-
-## Estrutura de Arquivos
-
-| Arquivo | Função |
-|---------|--------|
-`
+  const content = ``
   writeFileSync(agentsPath, content, 'utf8')
 }
 
